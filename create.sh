@@ -1,11 +1,11 @@
 #!/bin/bash
 
-export THIS_PATH=$(cd $(dirname ${0}) && pwd)
+export BACKUP_ROOT=$(cd $(dirname ${0}) && pwd)
 
-source ${THIS_PATH}/config.sh
-source ${THIS_PATH}/include/path.sh
+source ${BACKUP_ROOT}/config.sh
+source ${BACKUP_ROOT}/include/path.sh
 
 (
     flock -s 200
-    ${THIS_PATH}/include/snapshot.sh
-) 200>${THIS_PATH}/snapshots/lock
+    ${BACKUP_ROOT}/include/snapshot.sh
+) 200>${SNAPSHOTS_DIR}/lock
