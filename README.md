@@ -1,2 +1,2 @@
-- edit ./config.sh
-- execute ./create.sh
+- Create and edit ./config.sh based on ./config.sh.sample
+- Execute ./create.sh
