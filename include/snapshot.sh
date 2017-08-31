@@ -26,7 +26,7 @@ message "syncronization finished at `date`"
 
 REMOVED_SNAPSHOT=`get_snapshot_dirname_xdays_ago 31`
 
-message "the old snapshot ${REMOVED_SNAPSHOT} is a candidcate for being removed"
+message "the old snapshot ${REMOVED_SNAPSHOT} is a candidate for being removed"
 if [ "`date +%d`" = "01" ]; then
     message "skip removing ${REMOVED_SNAPSHOT} because of keeping a per-month snapshot"
     exit
