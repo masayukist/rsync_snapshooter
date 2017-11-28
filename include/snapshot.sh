@@ -34,9 +34,9 @@ fi
 
 # remove all the old snapshots 1 year ago
 
-REMOVED_SNAPSHOT=`get_snapshot_dirname_xdays_ago 256`
+REMOVED_SNAPSHOT=`get_snapshot_dirname_xdays_ago 365`
 remove_snapshot_dir ${REMOVED_SNAPSHOT}
-REMOVED_SNAPSHOT_LOG=`get_snapshot_logfile_xdays_ago 256`
+REMOVED_SNAPSHOT_LOG=`get_snapshot_logfile_xdays_ago 365`
 remove_file ${REMOVED_SNAPSHOT_LOG}.xz
 
 compresslog
