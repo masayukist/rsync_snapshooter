@@ -12,7 +12,8 @@ get_snapshot_logfile_xdays_ago ()
 {
     YEAR=`date -d "${1} days ago" +%Y`
     DATE=`date -d "${1} days ago" +%m%d`
-    DIR=${LOG_DIR}/${YEAR}/${DATE}.log
+    LOGFILE=${LOG_BASE_DIR}/${YEAR}/${DATE}.log
+    echo ${LOGFILE}
 }
 
 get_opt_prev_snapshot_dir ()
@@ -45,5 +46,17 @@ remove_snapshot_dir ()
 	message "finished removing the old snapshot at `date`"
     else
 	message "the old snapshot ${REMOVED_SNAPSHOT} does not exist"
+    fi
+}
+
+remove_file ()
+{
+    REMOVED_FILE=${1}
+    
+    if [ -e ${REMOVED_FILE} ]; then
+	execute rm ${REMOVED_FILE}
+	message "finished removing the file ${REMOVED_FILE}"
+    else
+	message "${REMOVED_FILE} does not exist and not removed"
     fi
 }
