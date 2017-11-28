@@ -13,3 +13,7 @@ execute ()
     $* >> ${LOG_FILE} 2>&1
 }
 
+compresslog ()
+{
+    xz ${LOG_FILE}
+}

@@ -22,19 +22,22 @@ message "syncronization started at `date`"
 execute rsync --delete -e ssh ${PREV_SNAP_DIR_OPT} --exclude-from=${RSYNC_EXCLUDE_FILE} -avlz ${ORIGINAL_DIR}/ ${SNAP_DIR}
 message "syncronization finished at `date`"
 
-# remove the old snapshots
+# remove the old snapshots and keep a per-month snapshot
 
 REMOVED_SNAPSHOT=`get_snapshot_dirname_xdays_ago 31`
 
-message "the old snapshot ${REMOVED_SNAPSHOT} is a candidate for being removed"
 if [ "`date +%d`" = "01" ]; then
     message "skip removing ${REMOVED_SNAPSHOT} because of keeping a per-month snapshot"
     exit
-fi
-	
-if [ -e ${REMOVED_SNAPSHOT} ]; then
-    execute rm -rf ${REMOVED_SNAPSHOT}
-    message "finished removing the old snapshot at `date`"
 else
-    message "the old snapshot ${REMOVED_SNAPSHOT} does not exist"
+    remove_snapshot_dir ${REMOVED_SNAPSHOT}
 fi
+
+# remove all the old snapshots 1 year ago
+
+REMOVED_SNAPSHOT=`get_snapshot_dirname_xdays_ago 256`
+remove_snapshot_dir ${REMOVED_SNAPSHOT}
+REMOVED_SNAPSHOT_LOG=`get_snapshot_logfile_xdays_ago 256`
+message rm ${REMOVED_SNAPSHOT_LOG}.xz
+
+compresslog
