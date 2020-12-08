@@ -22,7 +22,7 @@ get_opt_prev_snapshot_dir ()
     PREV_SNAP_DIR=`get_snapshot_dirname_xdays_ago ${DAY_AGO}`
     while [ ! -e ${PREV_SNAP_DIR} ]
     do
-        if [ ${DAY_AGO} -ge 30 ]
+        if [ ${DAY_AGO} -ge 365 ]
         then
             message "no suitable snapshot is discovered."
             echo ""
