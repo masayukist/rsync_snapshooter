@@ -16,7 +16,7 @@ get_snapshot_logfile_xdays_ago ()
     echo ${LOGFILE}
 }
 
-get_opt_prev_snapshot_dir ()
+get_prev_snapshot_dir ()
 {
     DAY_AGO=1
     PREV_SNAP_DIR=`get_snapshot_dirname_xdays_ago ${DAY_AGO}`
@@ -24,13 +24,19 @@ get_opt_prev_snapshot_dir ()
     do
         if [ ${DAY_AGO} -ge 365 ]
         then
-            message "no suitable snapshot is discovered."
+            message "no suitable snapshot is discovered within 365 days."
             echo ""
             return
         fi
         DAY_AGO=`expr ${DAY_AGO} + 1`
         PREV_SNAP_DIR=`get_snapshot_dirname_xdays_ago ${DAY_AGO}`
     done
+    echo ${PREV_SNAP_DIR}
+}
+
+get_opt_prev_snapshot_dir ()
+{
+    PREV_SNAP_DIR=`get_prev_snapshot_dir`
     echo "--link-dest ${PREV_SNAP_DIR}"
 }
 
