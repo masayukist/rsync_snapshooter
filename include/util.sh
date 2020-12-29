@@ -42,7 +42,6 @@ get_opt_prev_snapshot_dir ()
 
 remove_snapshot_dir ()
 {
-    #REMOVED_SNAPSHOT=`get_snapshot_dirname_xdays_ago 31`
     REMOVED_SNAPSHOT=${1}
 
     message "the old snapshot ${REMOVED_SNAPSHOT} is a candidate for being removed"
@@ -55,14 +54,16 @@ remove_snapshot_dir ()
     fi
 }
 
-remove_file ()
+remove_log ()
 {
-    REMOVED_FILE=${1}
-    
-    if [ -e ${REMOVED_FILE} ]; then
-	execute rm ${REMOVED_FILE}
-	message "finished removing the file ${REMOVED_FILE}"
+    REMOVED_LOG=${1}
+
+    message "the old snapshot ${REMOVED_LOG} is a candidate for being removed"
+
+    if [ -e ${REMOVED_LOG} ]; then
+	execute rm ${REMOVED_LOG}
+	message "finished removing the file ${REMOVED_LOG}"
     else
-	message "${REMOVED_FILE} does not exist and not removed"
+	message "${REMOVED_LOG} does not exist and not removed"
     fi
 }

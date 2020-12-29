@@ -5,4 +5,4 @@ ORIGINAL_DIR=/home/masa/dotman
 KEEP_ONLY_ONE_BACKUP=no
 
 # rsync additional opt
-RSYNC_OPT="-e ssh -avlz --delete"
+RSYNC_OPT="-avl --delete"

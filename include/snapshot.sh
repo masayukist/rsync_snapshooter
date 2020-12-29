@@ -22,7 +22,7 @@ message "syncronization started at `date`"
 execute rsync ${RSYNC_OPT} --link-dest ${PREV_SNAP_DIR} --exclude-from=${RSYNC_EXCLUDE_FILE} ${ORIGINAL_DIR}/ ${SNAP_DIR}
 message "syncronization finished at `date`"
 
-if [ "${KEEP_ONLY_ONE_BACKUP" = "yes" ]; then
+if [ "${KEEP_ONLY_ONE_BACKUP}" = "yes" ]; then
     remove_snapshot_dir ${PREV_SNAP_DIR}
 else
     # remove the old snapshots and keep a per-month snapshot
@@ -38,7 +38,7 @@ fi
 REMOVED_SNAPSHOT=`get_snapshot_dirname_xdays_ago 365`
 remove_snapshot_dir ${REMOVED_SNAPSHOT}
 REMOVED_SNAPSHOT_LOG=`get_snapshot_logfile_xdays_ago 365`
-remove_file ${REMOVED_SNAPSHOT_LOG}.xz
+remove_log ${REMOVED_SNAPSHOT_LOG}.xz
 
 message "finished at `date`"
 compresslog
