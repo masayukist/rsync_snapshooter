@@ -37,17 +37,29 @@ get_prev_snapshot_dir ()
 get_opt_prev_snapshot_dir ()
 {
     PREV_SNAP_DIR=`get_prev_snapshot_dir`
-    echo "--link-dest ${PREV_SNAP_DIR}"
+    if [ "${PREV_SNAP_DIR}" = "" ]
+    then
+	message "--link-dest option is disabled."
+	echo ""
+	return
+    fi
+    echo "--link-dest=${PREV_SNAP_DIR}"
 }
 
 remove_snapshot_dir ()
 {
+    if [ "${1}" = "" ]
+    then
+	message "nothing to be removed."
+	return
+    fi
+    
     REMOVED_SNAPSHOT=${1}
 
     message "the old snapshot ${REMOVED_SNAPSHOT} is a candidate for being removed"
 	
-    if [ -e ${REMOVED_SNAPSHOT} ]; then
-	execute rm -r ${REMOVED_SNAPSHOT}
+    if [ -e "${REMOVED_SNAPSHOT}" ]; then
+	execute rm -r "${REMOVED_SNAPSHOT}"
 	message "finished removing the old snapshot at `date`"
     else
 	message "the old snapshot ${REMOVED_SNAPSHOT} does not exist"
@@ -58,10 +70,16 @@ remove_log ()
 {
     REMOVED_LOG=${1}
 
+    if [ "${1}" = "" ]
+    then
+	message "nothing to be removed."
+	return
+    fi
+
     message "the old snapshot ${REMOVED_LOG} is a candidate for being removed"
 
-    if [ -e ${REMOVED_LOG} ]; then
-	execute rm ${REMOVED_LOG}
+    if [ -e "${REMOVED_LOG}" ]; then
+	execute rm "${REMOVED_LOG}"
 	message "finished removing the file ${REMOVED_LOG}"
     else
 	message "${REMOVED_LOG} does not exist and not removed"

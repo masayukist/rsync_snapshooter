@@ -6,3 +6,8 @@ KEEP_ONLY_ONE_BACKUP=no
 
 # rsync additional opt
 RSYNC_OPT="-avl --delete"
+
+# do not touch below
+export ORIGINAL_DIR
+export KEEP_ONLY_ONE_BACKUP
+export RSYNC_OPT
