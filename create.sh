@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 export BACKUP_ROOT=$(cd $(dirname ${0}) && pwd)
 
 if [ ! -e ${BACKUP_ROOT}/config.sh ]; then
